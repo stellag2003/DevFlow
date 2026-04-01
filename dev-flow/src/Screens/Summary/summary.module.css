@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.card {
+  background: #2d1b4e;
+  border: 4px solid #8a2be2;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 10px 10px 0px #000;
+}
+
+.stats {
+  margin: 20px 0;
+  font-size: 1.2rem;
+}
+
+.xp {
+  color: #ff9f0a;
+  font-weight: bold;
+}
+
+.congrats {
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.btnBack {
+  background: #ff9f0a;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+  font-size: 0.7rem;
+}

@@ -1,0 +1,69 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "stella",
+      "name": "Stella",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100
+    },
+    {
+      "username": "stella",
+      "name": "Stella",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "KaKjcOP8Nag"
+    },
+    {
+      "username": "sophia",
+      "name": "Sophia",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "WUz_G7r6gMQ"
+    },
+    {
+      "username": "sophia",
+      "name": "sophia",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "_ytj6b9ycH8"
+    },
+    {
+      "username": "a",
+      "name": "a",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "vML1ZmhcNXo"
+    }
+  ],
+  "sessions": [],
+  "mentors": [
+    {
+      "id": "1",
+      "name": "Grace Hopper",
+      "role": "Mestra dos Compiladores",
+      "xpRequired": 50,
+      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=grace",
+      "message": "Seu código é poesia em movimento!"
+    },
+    {
+      "id": "2",
+      "name": "Ada Lovelace",
+      "role": "Primeira Programadora",
+      "xpRequired": 150,
+      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=ada",
+      "message": "A lógica é a linguagem do futuro."
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

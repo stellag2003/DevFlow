@@ -1,121 +1,96 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Login from './Screens/Login';
+import Onboarding from './Screens/OnBoarding';
+import Dashboard from './Screens/Dashboard';
+import Focus from './Screens/Focus';
+import Summary from './Screens/Summary';
+import HallOfFame from './Screens/HallOfFame';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+interface User {
+  id: string;
+  username: string;
+  name: string;
+  level: number;
+  xp: number;
+  streak: number;
+  requiredXp: number;
 }
 
-export default App
+function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const [screen, setScreen] = useState<'login' | 'onboarding' | 'dashboard' | 'focus' | 'summary' | 'hall'>('login');
+  const [lastSession, setLastSession] = useState<any>(null);
+  const [selectedMentor, setSelectedMentor] = useState<any>(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('devflow_user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+      setScreen('dashboard');
+    }
+  }, []);
+
+  const handleLogin = (userData: User, isNew: boolean) => {
+    setUser(userData);
+    localStorage.setItem('devflow_user', JSON.stringify(userData));
+    if (isNew) {
+      setScreen('onboarding');
+    } else {
+      setScreen('dashboard');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('devflow_user');
+    setUser(null);
+    setScreen('login');
+  };
+
+  return (
+    <div className="App starry-bg">
+      {screen === 'login' && <Login onLoginSuccess={handleLogin} />}
+      
+      {screen === 'onboarding' && (
+        <Onboarding onSelect={(mentor) => {
+          setSelectedMentor(mentor);
+          setScreen('dashboard');
+        }} />
+      )}
+
+      {screen === 'dashboard' && user && (
+        <Dashboard 
+          user={user} 
+          onStartMission={() => setScreen('focus')} 
+          onHallOfFame={() => setScreen('hall')}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {screen === 'focus' && (
+        <Focus onFinish={(data) => {
+          setLastSession(data);
+          setScreen('summary');
+        }}
+        onCancel={() => setScreen('dashboard')}
+        />
+      )}
+
+      {screen === 'summary' && user && (
+        <Summary 
+          data={lastSession} 
+          user={user} 
+          onBack={() => setScreen('dashboard')} 
+        />
+      )}
+
+      {screen === 'hall' && user && (
+        <HallOfFame user={user} onBack={() => setScreen('dashboard')} />
+      )}
+
+      
+    </div>
+  );
+}
+
+export default App;
