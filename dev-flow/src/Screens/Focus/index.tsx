@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 import styles from './focus.module.css';
 import ProgressBar from '../../componentes/ProgressBar';
 import Swal from 'sweetalert2';
+import useGameAudio from '../../hooks/useGameAudio';
 
 interface FocusProps {
+  initialMinutes: number; // Prop que vem do App.tsx
   onFinish: (data: { xpGained: number; minutes: number }) => void;
   onCancel: () => void;
 }
 
-const Focus: React.FC<FocusProps> = ({ onFinish, onCancel }) => {
-  const [seconds, setSeconds] = useState(1500);
+const Focus: React.FC<FocusProps> = ({ initialMinutes, onFinish, onCancel }) => {
+  // Calculamos os segundos totais baseados na escolha do usuário
+  const [seconds, setSeconds] = useState(initialMinutes * 60);
   const [isActive, setIsActive] = useState(true);
+  const { playSound } = useGameAudio();
 
   useEffect(() => {
     let interval: any = null;
@@ -21,32 +25,35 @@ const Focus: React.FC<FocusProps> = ({ onFinish, onCancel }) => {
       }, 1000);
     } else if (seconds === 0) {
       clearInterval(interval);
+      playSound('success');
       
+      // XP proporcional: 2 XP por minuto estudado
+      const xpCalculated = initialMinutes * 2;
+
       Swal.fire({
         title: 'MISSÃO CUMPRIDA!',
-        text: 'Você concluiu 25 minutos de foco e ganhou +50 XP!',
+        text: `Você completou ${initialMinutes} minutos de foco e ganhou +${xpCalculated} XP!`,
         icon: 'success',
         background: '#1a1a2e',
         color: '#fff',
-        confirmButtonColor: '#FF9F0A',
-        confirmButtonText: 'RECEBER RECOMPENSA'
+        confirmButtonColor: '#FF9F0A'
       }).then(() => {
-        onFinish({ xpGained: 50, minutes: 25 });
+        onFinish({ xpGained: xpCalculated, minutes: initialMinutes });
       });
     }
 
     return () => clearInterval(interval);
-  }, [isActive, seconds, onFinish]);
+  }, [isActive, seconds, initialMinutes, onFinish, playSound]);
 
   const handleExit = () => {
     setIsActive(false);
+    playSound('alert');
     Swal.fire({
       title: 'ABORTAR MISSÃO?',
       text: "Seu progresso atual será perdido!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#ff4444',
-      cancelButtonColor: '#333',
       confirmButtonText: 'SIM, SAIR',
       cancelButtonText: 'CANCELAR',
       background: '#1a1a2e',
@@ -66,19 +73,22 @@ const Focus: React.FC<FocusProps> = ({ onFinish, onCancel }) => {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const progress = ((1500 - seconds) / 1500) * 100;
+  const totalSeconds = initialMinutes * 60;
+  const progress = ((totalSeconds - seconds) / totalSeconds) * 100;
 
   return (
     <div className={styles.container}>
       <button className={styles.btnClose} onClick={handleExit}>×</button>
-      
       <div className={styles.timerBox}>
-        <h2 className="glitch-text">MISSÃO ATIVA</h2>
+        <h2 className="glitch-text">MISSÃO EM CURSO</h2>
         <div className={styles.clock}>{formatTime(seconds)}</div>
         <ProgressBar progress={progress} color="#FF9F0A" />
         <div className={styles.controls}>
           <button 
-            onClick={() => setIsActive(!isActive)} 
+            onClick={() => {
+              playSound('click');
+              setIsActive(!isActive);
+            }} 
             className={styles.btnPause}
           >
             {isActive ? 'PAUSAR' : 'RETOMAR'}

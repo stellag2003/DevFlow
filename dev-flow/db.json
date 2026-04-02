@@ -4,37 +4,19 @@
       "id": "1",
       "username": "stella",
       "name": "Stella",
-      "level": 1,
-      "xp": 0,
-      "streak": 0,
-      "requiredXp": 100
+      "level": 10,
+      "xp": 500,
+      "streak": 5,
+      "requiredXp": 1000
     },
     {
-      "username": "stella",
-      "name": "Stella",
+      "username": "sasa",
+      "name": "sasa",
       "level": 1,
       "xp": 0,
       "streak": 0,
       "requiredXp": 100,
-      "id": "KaKjcOP8Nag"
-    },
-    {
-      "username": "sophia",
-      "name": "Sophia",
-      "level": 1,
-      "xp": 0,
-      "streak": 0,
-      "requiredXp": 100,
-      "id": "WUz_G7r6gMQ"
-    },
-    {
-      "username": "sophia",
-      "name": "sophia",
-      "level": 1,
-      "xp": 0,
-      "streak": 0,
-      "requiredXp": 100,
-      "id": "_ytj6b9ycH8"
+      "id": "uQ1gnPWN6Nw"
     },
     {
       "username": "a",
@@ -43,26 +25,138 @@
       "xp": 0,
       "streak": 0,
       "requiredXp": 100,
-      "id": "vML1ZmhcNXo"
+      "id": "flGLAO1CzWY"
+    },
+    {
+      "username": "d",
+      "name": "d",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "D3fNXMY_C_E"
+    },
+    {
+      "username": "ds",
+      "name": "ds",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "WPn3UyGKVQ0"
+    },
+    {
+      "username": "s",
+      "name": "s",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "G78CXSVZ-oQ"
+    },
+    {
+      "username": "c",
+      "name": "c",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "_-7DFFrzsqM"
+    },
+    {
+      "username": "d",
+      "name": "d",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "-2sphBLOQtE"
+    },
+    {
+      "username": "f",
+      "name": "f",
+      "level": 1,
+      "xp": 0,
+      "streak": 0,
+      "requiredXp": 100,
+      "id": "4mR5-d1lUUs"
     }
   ],
-  "sessions": [],
   "mentors": [
     {
       "id": "1",
-      "name": "Grace Hopper",
-      "role": "Mestra dos Compiladores",
-      "xpRequired": 50,
-      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=grace",
-      "message": "Seu código é poesia em movimento!"
+      "name": "Ada Lovelace",
+      "role": "Mãe da Programação",
+      "xpRequired": 0,
+      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=Ada",
+      "bio": "Matemática e escritora inglesa, escreveu o primeiro algoritmo para ser processado por uma máquina (a Máquina Analítica de Babbage) em 1843.",
+      "messages": [
+        "A ciência da computação antecipa a linguagem do universo.",
+        "Não se esqueça de documentar seu raciocínio!",
+        "A imaginação é a faculdade da descoberta.",
+        "Mantenha o foco, o algoritmo está quase pronto.",
+        "Sinto que o motor analítico tece padrões algébricos como o tear tece flores."
+      ]
     },
     {
       "id": "2",
-      "name": "Ada Lovelace",
-      "role": "Primeira Programadora",
+      "name": "Alan Turing",
+      "role": "Pai da Computação",
       "xpRequired": 150,
-      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=ada",
-      "message": "A lógica é a linguagem do futuro."
+      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=Alan",
+      "bio": "Matemático e criptógrafo britânico. Decifrou os códigos da máquina Enigma na 2ª Guerra e criou o conceito da Máquina de Turing, base da computação moderna.",
+      "messages": [
+        "Podemos apenas ver uma curta distância à frente, mas há muito a ser feito.",
+        "Raciocínio lógico é a chave para vencer qualquer bug.",
+        "Às vezes, são as pessoas de quem ninguém espera nada que fazem as coisas que ninguém pode imaginar.",
+        "Uma máquina pode ser inteligente? Vamos descobrir hoje.",
+        "Mantenha a calma e continue codando."
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Grace Hopper",
+      "role": "Rainha do COBOL",
+      "xpRequired": 300,
+      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=Grace",
+      "bio": "Almirante da Marinha dos EUA. Criou o primeiro compilador da história e popularizou o termo 'bug' após encontrar uma mariposa física dentro de um computador.",
+      "messages": [
+        "É mais fácil pedir perdão do que permissão.",
+        "Um navio no porto está seguro, mas não é para isso que navios foram feitos.",
+        "A frase mais perigosa do vocabulário é: 'Sempre fizemos assim'.",
+        "Já verificou se não há um 'bug' literal no seu código?",
+        "Mantenha seu código limpo e suas ideias à frente do seu tempo."
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Margaret Hamilton",
+      "role": "Diretora da Apollo 11",
+      "xpRequired": 450,
+      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=Margaret",
+      "bio": "Cientista da computação que liderou a equipe que desenvolveu o software de voo para o projeto Apollo da NASA. Criou o termo 'Engenharia de Software'.",
+      "messages": [
+        "Não tenha medo de errar, tenha medo de não aprender com o erro.",
+        "Software é sobre rigor e antecipação de falhas.",
+        "Se o código da Apollo levou o homem à Lua, o seu pode conquistar o mundo.",
+        "Priorize as tarefas críticas primeiro.",
+        "Atenção aos detalhes! Erros pequenos podem causar grandes problemas."
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Hedy Lamarr",
+      "role": "Mãe do Wi-Fi",
+      "xpRequired": 600,
+      "avatar": "https://api.dicebear.com/8.x/pixel-art/svg?seed=Hedy",
+      "bio": "Atriz de cinema que inventou a tecnologia de salto de frequência durante a 2ª Guerra, que hoje é a base para o Wi-Fi, Bluetooth e CDMA.",
+      "messages": [
+        "A esperteza é o que você usa para sobreviver; a inteligência é o que você usa para prosperar.",
+        "Sua conexão com o código deve ser inquebrável.",
+        "O mundo não é fácil, mas você é mais inteligente que os obstáculos.",
+        "A criatividade é a melhor ferramenta de um desenvolvedor.",
+        "A beleza da tecnologia está na sua invisibilidade."
+      ]
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

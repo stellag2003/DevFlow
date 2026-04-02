@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './dashboard.module.css';
 import ProgressBar from '../../componentes/ProgressBar';
+import useGameAudio from '../../hooks/useGameAudio';
 
 interface User {
   id: string;
@@ -13,13 +14,20 @@ interface User {
 
 interface DashboardProps {
   user: User;
-  onStartMission: () => void;
+  onStartMission: (minutes: number) => void; // Agora recebe os minutos
   onHallOfFame: () => void;
   onLogout: () => void;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ user, onStartMission, onHallOfFame, onLogout }) => {
+  const [selectedTime, setSelectedTime] = useState(25);
+  const { playSound } = useGameAudio();
   const xpPercentage = (user.xp / user.requiredXp) * 100;
+
+  const handleStart = () => {
+    playSound('click');
+    onStartMission(selectedTime);
+  };
 
   return (
     <div className={styles.container}>
@@ -35,18 +43,29 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onStartMission, onHallOfFam
       </aside>
 
       <main className={styles.content}>
-        <h1 className="glitch-text">CENTRAL DE COMANDO</h1>
+        <h1 className="glitch-text">CENTRAL</h1>
+        
         <div className={styles.xpBox}>
-          <p>XP PROGRESS: {user.xp} / {user.requiredXp}</p>
+          <p>XP PROGRESSO: {user.xp} / {user.requiredXp}</p>
           <ProgressBar progress={xpPercentage} color="#8A2BE2" />
         </div>
 
         <div className={styles.missionCard}>
           <div>
-            <h3>MISSÃO DE FOCO</h3>
-            <p>25:00 MINUTOS</p>
+            <h3>CONFIGURAR MISSÃO</h3>
+            <p>Escolha a duração do seu foco:</p>
+            <select 
+              className={styles.timeSelect}
+              value={selectedTime}
+              onChange={(e) => setSelectedTime(Number(e.target.value))}
+            >
+              <option value={10}>10 MINUTOS (SPRINT)</option>
+              <option value={25}>25 MINUTOS (POMODORO)</option>
+              <option value={50}>50 MINUTOS (DEEP WORK)</option>
+              <option value={90}>90 MINUTOS (EXTREMO)</option>
+            </select>
           </div>
-          <button onClick={onStartMission} className={styles.btnPlay}>INICIAR</button>
+          <button onClick={handleStart} className={styles.btnPlay}>INICIAR</button>
         </div>
       </main>
     </div>

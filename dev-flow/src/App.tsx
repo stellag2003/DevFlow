@@ -5,6 +5,8 @@ import Dashboard from './Screens/Dashboard';
 import Focus from './Screens/Focus';
 import Summary from './Screens/Summary';
 import HallOfFame from './Screens/HallOfFame';
+import MentorHelper from './componentes/MentorHelper';
+import useGameAudio from './hooks/useGameAudio'; // Importado
 import './App.css';
 
 interface User {
@@ -22,6 +24,9 @@ function App() {
   const [screen, setScreen] = useState<'login' | 'onboarding' | 'dashboard' | 'focus' | 'summary' | 'hall'>('login');
   const [lastSession, setLastSession] = useState<any>(null);
   const [selectedMentor, setSelectedMentor] = useState<any>(null);
+  const [missionTime, setMissionTime] = useState<number>(25);
+  
+  const { playMusic } = useGameAudio(); // Hook centralizado
 
   useEffect(() => {
     const savedUser = localStorage.getItem('devflow_user');
@@ -34,6 +39,9 @@ function App() {
   const handleLogin = (userData: User, isNew: boolean) => {
     setUser(userData);
     localStorage.setItem('devflow_user', JSON.stringify(userData));
+    
+    playMusic(); // Toca a música no login e não duplica mais
+
     if (isNew) {
       setScreen('onboarding');
     } else {
@@ -61,18 +69,23 @@ function App() {
       {screen === 'dashboard' && user && (
         <Dashboard 
           user={user} 
-          onStartMission={() => setScreen('focus')} 
+          onStartMission={(minutes) => {
+            setMissionTime(minutes);
+            setScreen('focus');
+          }} 
           onHallOfFame={() => setScreen('hall')}
           onLogout={handleLogout}
         />
       )}
 
       {screen === 'focus' && (
-        <Focus onFinish={(data) => {
-          setLastSession(data);
-          setScreen('summary');
-        }}
-        onCancel={() => setScreen('dashboard')}
+        <Focus 
+          initialMinutes={missionTime}
+          onFinish={(data) => {
+            setLastSession(data);
+            setScreen('summary');
+          }}
+          onCancel={() => setScreen('dashboard')}
         />
       )}
 
@@ -85,10 +98,16 @@ function App() {
       )}
 
       {screen === 'hall' && user && (
-        <HallOfFame user={user} onBack={() => setScreen('dashboard')} />
+        <HallOfFame 
+          user={user} 
+          currentMentorId={selectedMentor?.id}
+          onSelectMentor={(mentor) => setSelectedMentor(mentor)}
+          onBack={() => setScreen('dashboard')} 
+        />
       )}
 
-      
+      {/* O Mentor aparece em qualquer tela após o login */}
+      {user && selectedMentor && <MentorHelper mentor={selectedMentor} />}
     </div>
   );
 }

@@ -66,6 +66,11 @@
   box-shadow: 4px 4px 0px #1b5e20;
 }
 
+.btnPlay:hover {
+  background: #45a049;
+  box-shadow: 6px 6px 0px #1b5e20;
+} 
+
 .btnLogout {
   margin-top: auto;
   background: transparent;
@@ -73,4 +78,21 @@
   border: 1px solid #ff4444;
   cursor: pointer;
   padding: 10px;
+}
+
+.timeSelect {
+  width: 100%;
+  padding: 12px;
+  background: #0d0d1a;
+  border: 2px solid var(--accent);
+  color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.65rem;
+  margin-top: 15px;
+  cursor: pointer;
+  outline: none;
+}
+
+.timeSelect:hover {
+  border-color: var(--highlight);
 }

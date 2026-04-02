@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import api from '../../services/api';
 import styles from './login.module.css';
 import Swal from 'sweetalert2';
+import useGameAudio from '../../hooks/useGameAudio';
 
 interface User {
   id: string;
@@ -20,8 +21,11 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState<string>('');
   const [isRegistering, setIsRegistering] = useState<boolean>(false);
+  const { playSound, playMusic } = useGameAudio();
 
   const handleAuth = async () => {
+    playSound('click');
+    
     if (!username) {
       Swal.fire({
         icon: 'warning',
@@ -45,10 +49,12 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           requiredXp: 100
         };
         const res = await api.post('/users', newUser);
+        playMusic();
         onLoginSuccess(res.data, true);
       } else {
         const res = await api.get(`/users?username=${username.toLowerCase()}`);
         if (res.data.length > 0) {
+          playMusic();
           onLoginSuccess(res.data[0], false);
         } else {
           Swal.fire({

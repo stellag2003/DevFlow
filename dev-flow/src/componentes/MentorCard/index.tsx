@@ -8,6 +8,7 @@ interface MentorCardProps {
   userXp: number;
   avatar: string;
   message: string;
+  isCurrent?: boolean;
 }
 
 const MentorCard: React.FC<MentorCardProps> = ({ 
