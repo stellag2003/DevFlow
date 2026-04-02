@@ -1,4 +1,4 @@
-# ⚡ DevFlow - Sua Produtividade Vira Poder
+# ⚡ DevFlow - Sua Produtividade Vira XP
 
 O **DevFlow** é uma aplicação de foco e produtividade gamificada, focada em desenvolvedores que desejam transformar horas de estudo em conquistas. Utilize a técnica Pomodoro, acumule XP e desbloqueie mentores lendários da história da tecnologia!
 
@@ -7,7 +7,7 @@ O **DevFlow** é uma aplicação de foco e produtividade gamificada, focada em d
 ## 🚀 Demonstração
 
 O projeto está disponível online! Confira aqui:
-👉 [LINK_DO_SEU_SITE_NO_GITHUB_PAGES](https://stellag2003.github.io/DevFlow/)
+👉 [LINK](https://stellag2003.github.io/DevFlow/)
 
 ---
 
